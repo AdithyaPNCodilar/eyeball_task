@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Eyeball movement</title>
+</head>
+<body>
+    <div class="box">
+            <div class="eye"></div>
+            <div class="eye"></div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('body').addEventListener('mousemove', eyeball);
+        // querySelector() returns the first child element that matches a specified css selector of an element
+        
+        function eyeball(){
+            const eye = document.querySelectorAll('.eye');
+            // querSelector returns all the matches
+            eye.forEach(function(eye){
+                let x = (eye.getBoundingClientRect().left) + (eye. clientWidth/2);
+                let y = (eye.getBoundingClientRect().top) + (eye. clientWidth/2);
+                //getBoundingClientRect() returns the size of an element and its position relative to the viewport
+                // clientWidth property returns the viewable width of an element
+                let radian = Math.atan2(event.pageX - x, event.pageY - y);
+                //Math.atan2() returns the angle in the plane in radian
+                //pageX and pageY returns the document relative x and y coordinate of the mouse pointer when a mouse event occure
+                let rotation = (radian * (180 / Math.PI) * -1) + 270;
+                eye.style.transform = "rotate("+rotation+"deg)";
+            });
+        }
+    </script>
+</body>
+</html>
